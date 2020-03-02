@@ -1,0 +1,12 @@
+[
+    {
+      "icon": "people-outline",
+      "name": "Client",
+      "redirectTo": "/client"
+    },
+    {
+      "icon": "airplane-outline",
+      "name": "Travels",
+      "redirectTo": "/"
+    }
+  ]
