@@ -1,0 +1,19 @@
+<app-header title="Detail"></app-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="data:image/png;base64,{{clientDetail.photo}}">
+      </ion-avatar>
+      <ion-label>
+        <h3>{{clientDetail.first_name}} {{''}} {{clientDetail.last_name}}</h3>        
+        <p> {{clientDetail.email}} </p>
+        <p> {{clientDetail.phone}} </p>
+        <p> {{clientDetail.address}} </p>   
+      </ion-label>     
+    </ion-item>
+  </ion-list>
+
+</ion-content>
