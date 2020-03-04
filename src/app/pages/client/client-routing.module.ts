@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ClientPage
+  },
+  {
+    path: 'new-client',
+    loadChildren: () => import('./partials/new-client/new-client.module').then( m => m.NewClientPageModule)
   }
 ];
 

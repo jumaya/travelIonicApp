@@ -1,12 +1,18 @@
-<app-header title="Client"> </app-header>
+<app-header title="Client">
+
+</app-header>
 
 <ion-content>
 
+    <ion-searchbar placeholder="search by phone number" class="ion-no-border" animated
+        (ionChange)="onSearchChange($event, client)">
+    </ion-searchbar>
+
     <ion-list #lista>
 
-        <ion-item-sliding *ngFor="let item of client | async">
+        <ion-item-sliding *ngFor="let item of client | async | filtro:textSearch">
 
-            <ion-item detail (click)="onClick(item)"> 
+            <ion-item detail (click)="onClick(item)">
                 <ion-label>
                     <h3>{{item.first_name}} {{''}} {{item.last_name}}</h3>
                     <p> {{item.email}} </p>
@@ -23,9 +29,19 @@
                 <ion-item-option color="danger" (click)="delete(item)">
                     <ion-icon slot="icon-only" name="trash"></ion-icon>
                 </ion-item-option>
-            </ion-item-options>           
+            </ion-item-options>
+
         </ion-item-sliding>
 
     </ion-list>
+    
+    <ion-fab  *ngIf="(addClient | async)?.length == 0" 
+         vertical="bottom" 
+         horizontal="end" slot="fixed"
+         routerLink="/new-client">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 
 </ion-content>

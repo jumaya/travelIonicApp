@@ -3,17 +3,53 @@
 <ion-content>
 
   <ion-list>
+    
+ 
+
+
+  
+  
     <ion-item>
       <ion-avatar slot="start">
         <img src="data:image/png;base64,{{clientDetail.photo}}">
       </ion-avatar>
       <ion-label>
-        <h3>{{clientDetail.first_name}} {{''}} {{clientDetail.last_name}}</h3>        
+        <h3>{{clientDetail.first_name}} {{''}} {{clientDetail.last_name}}</h3>
         <p> {{clientDetail.email}} </p>
         <p> {{clientDetail.phone}} </p>
-        <p> {{clientDetail.address}} </p>   
-      </ion-label>     
+        <p> {{clientDetail.address}} </p>
+      </ion-label>
     </ion-item>
+ 
   </ion-list>
+
+  <ion-card>
+    <ion-item color="secondary">
+      <ion-icon slot="start" name="airplane"></ion-icon>
+      <ion-label> Travels </ion-label>
+    </ion-item>
+    
+    <ion-card-content *ngIf="(travel | async)?.length > 0" >    
+      <ion-item>
+        <ion-col size="5"> <ion-text color="tertiary"> <h3>Date</h3></ion-text> </ion-col>
+        <ion-col size="4"> <ion-text color="tertiary"> <h3>Country</h3></ion-text> </ion-col>
+        <ion-col size="3"> <ion-text color="tertiary"> <h3>City</h3></ion-text> </ion-col> 
+      </ion-item>
+
+      <ion-item *ngFor="let item of travel | async" >
+        <ion-col size="5"> {{item.travel_date | date }} </ion-col>   
+        <ion-col size="4"> {{item.country }} </ion-col>   
+        <ion-col size="3"> {{item.city }} </ion-col>                       
+      </ion-item>
+      
+    </ion-card-content>
+
+    <ion-card-content *ngIf="(travel | async)?.length == 0" >     
+      <ion-text color="tertiary">
+        <h2>No travels found</h2>
+      </ion-text>   
+    </ion-card-content>
+
+  </ion-card>
 
 </ion-content>

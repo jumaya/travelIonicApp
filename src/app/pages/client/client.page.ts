@@ -14,6 +14,8 @@ export class ClientPage implements OnInit {
   client: Observable<any>;
   loading: any;
   detailUser: any;
+  textSearch = "";
+  addClient : Observable<any>;
 
   constructor(
     private clientService: ClientService,
@@ -41,10 +43,20 @@ export class ClientPage implements OnInit {
     return this.client = this.clientService.getClient();
   }
 
-  onClick(user) {      
+  onClick(user) {
     localStorage.setItem("userData", JSON.stringify(user));
     return this.router.navigate(['/client-detail']);
-    
+  }
+
+  onSearchChange(event) {
+    localStorage.removeItem("phone");
+    this.textSearch = event.detail.value;   
+    this.searchbyPhoneNumber(this.textSearch);  
+    localStorage.setItem('phone', event.detail.value);  
+  }
+
+  async searchbyPhoneNumber(phone) {
+    return this.addClient = this.clientService.findClientByPhone(phone);  
   }
 
 }

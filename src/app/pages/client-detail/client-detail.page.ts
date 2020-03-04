@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
+import { ClientService } from './../../services/client.service';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-client-detail',
@@ -9,13 +10,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ClientDetailPage implements OnInit {
 
   clientDetail: any;
-  constructor(private router: Router,
-    private route: ActivatedRoute,
+  travel: Observable<any>;
+  constructor(
+    private clientService: ClientService 
+
   ) { }
 
   ngOnInit() {           
-     this.clientDetail = JSON.parse(localStorage.getItem("userData"));    
-     console.log(this.clientDetail);
+     this.clientDetail = JSON.parse(localStorage.getItem("userData"));     
+     this.getTravelById(this.clientDetail.client_id);     
+  }
+
+  async getTravelById(id){        
+    return this.travel = this.clientService.getTravelByClientId(id);          
   }
 
 }

@@ -1,0 +1,102 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" defaultHref="/client"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>New Client</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text color="dark">
+            <h3>First Name</h3>
+          </ion-text>
+        </ion-label>
+        <ion-input required formControlName="first_name" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.first_name">
+        <ion-item *ngIf="first_name.hasError(error.type) && (first_name.dirty || first_name.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ion-item>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text color="dark">
+            <h3>Last Name</h3>
+          </ion-text>
+        </ion-label>
+        <ion-input required formControlName="last_name" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.last_name">
+        <ion-item *ngIf="last_name.hasError(error.type) && (last_name.dirty || last_name.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ion-item>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text color="dark">
+            <h3>E-Mail</h3>
+          </ion-text>
+        </ion-label>
+        <ion-input required formControlName="email" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.email">
+        <ion-item *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ion-item>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text color="dark">
+            <h3>Phone</h3>
+          </ion-text>
+        </ion-label>
+        <ion-input required formControlName="phone" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.phone">
+        <ion-item *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ion-item>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text color="dark">
+            <h3>Adress</h3>
+          </ion-text>
+        </ion-label>
+        <ion-input required formControlName="adress" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.adress">
+        <ion-item *ngIf="adress.hasError(error.type) && (adress.dirty || adress.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ion-item>
+      </div> <br>
+
+      <ion-button expand="block" color="primary" type="submit" [disabled]="loginForm.invalid">
+        Submit
+      </ion-button>
+
+    </form>
+
+  </ion-list>
+
+  <ion-item>
+    <ion-button (click)="takePicture()">Take picture      
+    </ion-button>
+    <img *ngIf="image" [src]="image" alt="image">
+  </ion-item>
+
+</ion-content>

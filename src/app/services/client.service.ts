@@ -15,4 +15,13 @@ export class ClientService {
   getClient() {     
     return this.http.get(this.ApiUrl + '/getClient');
   }
+
+  getTravelByClientId(client_id) {        
+    return this.http.get(this.ApiUrl + '/getTravelByClientId', { 'params': { 'data': client_id } });    
+  }
+
+  findClientByPhone(phone) {        
+    return this.http.get(this.ApiUrl + '/findClientByPhone', { 'params': { 'data': phone } });    
+  }
+    
 }
