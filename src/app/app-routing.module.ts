@@ -7,8 +7,7 @@ const routes: Routes = [
     path: 'client', loadChildren: () => import('./pages/client/client.module').then(m => m.ClientPageModule)
   },
   { path: 'client-detail', loadChildren: () => import('./pages/client-detail/client-detail.module').then(m => m.ClientDetailPageModule) },
-  { path: 'new-client', loadChildren: () => import('./pages/client/partials/new-client/new-client.module').then(m => m.NewClientPageModule) },
-
+  { path: 'new-client', loadChildren: () => import('./pages/client/partials/new-client/new-client.module').then(m => m.NewClientPageModule) }, 
 ];
 
 @NgModule({

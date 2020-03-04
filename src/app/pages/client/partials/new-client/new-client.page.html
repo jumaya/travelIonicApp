@@ -77,13 +77,23 @@
             <h3>Adress</h3>
           </ion-text>
         </ion-label>
-        <ion-input required formControlName="adress" type="text"></ion-input>
+        <ion-input required formControlName="address" type="text"></ion-input>
       </ion-item>
-      <div *ngFor="let error of errorMessages.adress">
-        <ion-item *ngIf="adress.hasError(error.type) && (adress.dirty || adress.touched)">
+      <div *ngFor="let error of errorMessages.address">
+        <ion-item *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
           <small class="error-message">{{error.message}}</small>
         </ion-item>
-      </div> <br>
+      </div>
+
+      <ion-item class="ion-no-border">
+        <ion-label slot="start">
+          <ion-text color="dark">
+            <h3>Photo: </h3>
+          </ion-text>
+        </ion-label>
+        <ion-button color="tertiary" slot="start" (click)="takePicture()">Take picture </ion-button>
+        <img *ngIf="image" style="position: static;" height="80" width="80" [src]="image">
+      </ion-item> <br>
 
       <ion-button expand="block" color="primary" type="submit" [disabled]="loginForm.invalid">
         Submit
@@ -92,11 +102,5 @@
     </form>
 
   </ion-list>
-
-  <ion-item>
-    <ion-button (click)="takePicture()">Take picture      
-    </ion-button>
-    <img *ngIf="image" [src]="image" alt="image">
-  </ion-item>
 
 </ion-content>

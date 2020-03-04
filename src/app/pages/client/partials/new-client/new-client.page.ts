@@ -1,3 +1,4 @@
+import { ClientService } from './../../../../services/client.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -22,12 +23,12 @@ export class NewClientPage implements OnInit {
   get email() {
     return this.loginForm.get("email");
   }
-  get adress() {
-    return this.loginForm.get("adress");
+  get address() {
+    return this.loginForm.get("address");
   }
 
   image: string;
-
+  base64Image = '';
 
   public errorMessages = {
     email: [
@@ -52,8 +53,8 @@ export class NewClientPage implements OnInit {
         message: 'Last name cant be longer than 128 characters'
       }
     ],
-    adress: [
-      { type: 'required', message: 'Adress is required' }
+    address: [
+      { type: 'required', message: 'Address is required' }
     ],
   };
 
@@ -62,7 +63,8 @@ export class NewClientPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private camera: Camera,
-    private webView: WebView
+    private webView: WebView,
+    private clientService: ClientService,
   ) {
 
     this.loginForm = this.formBuilder.group({
@@ -82,19 +84,27 @@ export class NewClientPage implements OnInit {
         ],
       first_name: ['', [Validators.required, Validators.maxLength(128)]],
       last_name: ['', [Validators.required, Validators.maxLength(128)]],
-      adress: ['', Validators.required],
+      address: ['', Validators.required],
     });
   }
-
 
   ngOnInit() {
 
   }
 
   onSubmit() {
-    console.log(this.loginForm.value)
-  }
+    const formData = new FormData();
+    formData.append('first_name', this.loginForm.value.first_name);
+    formData.append('last_name', this.loginForm.value.last_name);
+    formData.append('phone', this.loginForm.value.phone);
+    formData.append('address', this.loginForm.value.address);
+    formData.append('email', this.loginForm.value.email);   
 
+    this.clientService.saveClient(formData).toPromise().then((res) => {
+      alert('succes');
+    })
+      .catch(err => { console.log(err) });
+  }
 
   takePicture() {
     const options: CameraOptions = {
@@ -107,6 +117,7 @@ export class NewClientPage implements OnInit {
     this.camera.getPicture(options)
       .then((imageData) => {
         this.image = this.webView.convertFileSrc(imageData);
+        this.base64Image = 'data:image/jpeg;base64,' + imageData;
       }, (err) => {
         console.log(err);
       });
