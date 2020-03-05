@@ -8,6 +8,7 @@ import config from '../configuration/config';
 export class ClientService {
 
   ApiUrl = config.ApiUrl;
+  ApiLocal = config.ApiLocal;
 
   constructor(
     private http: HttpClient) { }
@@ -24,13 +25,7 @@ export class ClientService {
     return this.http.get(this.ApiUrl + '/findClientByPhone', { 'params': { 'data': phone } });
   }
 
-  saveClient(data) {
-    
-    const headers = {      
-      'content-type': 'application/json'
-    };
-
-    return this.http.post(this.ApiUrl + '/storeClient', data,
-      { headers: headers });
+  saveClient(data) {     
+    return this.http.post(this.ApiUrl + '/storeClient', data);
   }
 }
