@@ -93,7 +93,7 @@ export class NewClientPage implements OnInit {
   }
 
   ngOnInit() {
-
+    
   }
 
   onSubmit() {

@@ -25,7 +25,13 @@ export class ClientService {
     return this.http.get(this.ApiUrl + '/findClientByPhone', { 'params': { 'data': phone } });
   }
 
-  saveClient(data) {     
+  saveClient(data) {
     return this.http.post(this.ApiUrl + '/storeClient', data);
   }
+
+  getPhotoClient(client_id) {
+    return this.http.get(this.ApiUrl + '/getPhotoClient', { 'params': { 'data': client_id } });
+  }
+
+
 }

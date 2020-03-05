@@ -11,6 +11,7 @@ export class ClientDetailPage implements OnInit {
 
   clientDetail: any;
   travel: Observable<any>;
+  photo = '';
   constructor(
     private clientService: ClientService 
 
@@ -18,11 +19,18 @@ export class ClientDetailPage implements OnInit {
 
   ngOnInit() {           
      this.clientDetail = JSON.parse(localStorage.getItem("userData"));     
-     this.getTravelById(this.clientDetail.client_id);     
+     this.getTravelById(this.clientDetail.client_id);   
+     this.getPhoto(this.clientDetail.client_id);     
   }
 
   async getTravelById(id){        
     return this.travel = this.clientService.getTravelByClientId(id);          
+  }
+
+  async getPhoto(id){    
+    this.clientService.getPhotoClient(id).subscribe(res => {          
+      this.photo = 'data:image/jpg;base64,' + res['photo'];
+   });                
   }
 
 }

@@ -7,6 +7,6 @@
     {
       "icon": "airplane-outline",
       "name": "Travels",
-      "redirectTo": "/"
+      "redirectTo": "/travel"
     }
   ]

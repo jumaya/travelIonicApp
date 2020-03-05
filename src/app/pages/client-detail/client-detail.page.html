@@ -2,16 +2,12 @@
 
 <ion-content>
 
-  <ion-list>
-    
+  <ion-list> 
  
-
-
-  
   
     <ion-item>
       <ion-avatar slot="start">
-        <img src="data:image/png;base64,{{clientDetail.photo}}">
+        <img [src]="photo">
       </ion-avatar>
       <ion-label>
         <h3>{{clientDetail.first_name}} {{''}} {{clientDetail.last_name}}</h3>

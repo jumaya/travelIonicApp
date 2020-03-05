@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" defaultHref="/travel"></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Travel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <form [formGroup]="travelForm" (ngSubmit)="onSubmit()">
+
+      <ion-item>
+        <ion-label> Travel Date </ion-label>
+        <ion-datetime required formControlName="travel_date" 
+        placeholder="Travel Date"
+        display-format="YYYY MMMM DD">
+        </ion-datetime>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.travel_date">
+        <ion-item *ngIf="travel_date.hasError(error.type) && (travel_date.dirty || travel_date.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ion-item>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text color="dark">
+            <h3>Country</h3>
+          </ion-text>
+        </ion-label>
+        <ion-input required formControlName="country" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.country">
+        <ion-item *ngIf="country.hasError(error.type) && (country.dirty || country.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ion-item>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text color="dark">
+            <h3>City</h3>
+          </ion-text>
+        </ion-label>
+        <ion-input required formControlName="city" type="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of errorMessages.city">
+        <ion-item *ngIf="city.hasError(error.type) && (city.dirty || city.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ion-item>
+      </div>
+
+
+      <ion-item>
+        <ion-label> Curstomer email </ion-label>
+        <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select One">
+          <ion-select-option value="brown">Brown</ion-select-option>
+          <ion-select-option value="blonde">Blonde</ion-select-option>
+          <ion-select-option value="black">Black</ion-select-option>
+          <ion-select-option value="red">Red</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+      <ion-button block color="primary" type="submit" [disabled]="travelForm.invalid">
+        Submit
+      </ion-button>
+
+    </form>
+
+  </ion-list>
+
+</ion-content>

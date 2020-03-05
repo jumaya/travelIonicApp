@@ -1,0 +1,37 @@
+<app-header title="Travels"></app-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-col size="5">
+                <ion-text color="tertiary">
+                    Date
+                </ion-text>
+            </ion-col>
+            <ion-col size="4">
+                <ion-text color="tertiary">
+                    Country
+                </ion-text>
+            </ion-col>
+            <ion-col size="3">
+                <ion-text color="tertiary">
+                    City
+                </ion-text>
+            </ion-col>
+        </ion-item>
+
+        <ion-item *ngFor="let item of travel | async" detail (click)="onClick(item)">
+            <ion-col size="5"> {{item.travel_date | date }} </ion-col>
+            <ion-col size="4"> {{item.country }} </ion-col>
+            <ion-col size="3"> {{item.city }} </ion-col>
+        </ion-item>
+        
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="/new-travel">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>
