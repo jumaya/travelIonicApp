@@ -27,5 +27,9 @@ export class TravelService {
         }
       });
   }
+  
+  saveTravel(data) {
+    return this.http.post(this.ApiUrl + '/storeTravel', data);
+  }
 
 }

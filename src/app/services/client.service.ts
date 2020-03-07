@@ -33,5 +33,9 @@ export class ClientService {
     return this.http.get(this.ApiUrl + '/getPhotoClient', { 'params': { 'data': client_id } });
   }
 
+  deleteClient(data) {
+    return this.http.post(this.ApiUrl + '/deleteClient', data);
+  }
+
 
 }

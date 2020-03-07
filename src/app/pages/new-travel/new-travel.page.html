@@ -9,15 +9,15 @@
 
 <ion-content>
 
-  <ion-list>
+  <ion-list >
 
     <form [formGroup]="travelForm" (ngSubmit)="onSubmit()">
 
       <ion-item>
         <ion-label> Travel Date </ion-label>
         <ion-datetime required formControlName="travel_date" 
-        placeholder="Travel Date"
-        display-format="YYYY MMMM DD">
+             placeholder="Travel Date" 
+             display-format="DD MMMM YYYY">
         </ion-datetime>
       </ion-item>
       <div *ngFor="let error of errorMessages.travel_date">
@@ -53,20 +53,27 @@
           <small class="error-message">{{error.message}}</small>
         </ion-item>
       </div>
-
-
+      
       <ion-item>
-        <ion-label> Curstomer email </ion-label>
-        <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select One">
-          <ion-select-option value="brown">Brown</ion-select-option>
-          <ion-select-option value="blonde">Blonde</ion-select-option>
-          <ion-select-option value="black">Black</ion-select-option>
-          <ion-select-option value="red">Red</ion-select-option>
+        <ion-label> E-Mail</ion-label>
+        <ion-select        
+        (ionChange)="cambioUser()"
+        formControlName="email"
+        selectedText = "{{emailSelected}}"
+        interface="action-sheet"
+        [interfaceOptions]="customActionSheetOptions"
+        placeholder="Select One">          
+          <ion-select-option  [value]="user.email" *ngFor="let user of users | async">
+            {{user.first_name + ' ' + user.last_name}}         
+          </ion-select-option>
         </ion-select>
-      </ion-item>
+      </ion-item><br>
 
-
-      <ion-button block color="primary" type="submit" [disabled]="travelForm.invalid">
+      <ion-button    
+        #btnTravel   
+        expand="block" 
+        color="primary" 
+        type="submit" [disabled]="travelForm.invalid">
         Submit
       </ion-button>
 

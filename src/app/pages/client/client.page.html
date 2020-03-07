@@ -23,9 +23,6 @@
             </ion-item>
 
             <ion-item-options side="end">
-                <ion-item-option color="secondary" (click)="detail(item)">
-                    <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-                </ion-item-option>
                 <ion-item-option color="danger" (click)="delete(item)">
                     <ion-icon slot="icon-only" name="trash"></ion-icon>
                 </ion-item-option>
@@ -34,14 +31,17 @@
         </ion-item-sliding>
 
     </ion-list>
-    
-    <ion-fab  *ngIf="(addClient | async)?.length == 0" 
-         vertical="bottom" 
-         horizontal="end" slot="fixed"
-         routerLink="/new-client">
+
+    <ion-fab *ngIf="(addClient | async)?.length == 0" vertical="bottom" horizontal="end" slot="fixed"
+        routerLink="/new-client">
         <ion-fab-button>
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+
+    <ion-infinite-scroll threshold="150px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>
